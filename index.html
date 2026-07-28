@@ -2,7 +2,11 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0b1326">
   <title>ลงทะเบียนงานเลี้ยงรุ่น NCO.1828 เหล่าทหารปืนใหญ่</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,12 +33,76 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Sarabun', sans-serif;
       background: radial-gradient(circle at top center, #1a2b4c 0%, #080d1a 100%);
       color: var(--text-main);
       min-height: 100vh;
-      padding: 20px 10px 60px 10px;
+      padding: 20px 10px 90px 10px;
+    }
+
+    /* Mobile Bottom Navigation */
+    .mobile-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(11, 19, 38, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 999;
+      box-shadow: 0 -5px 25px rgba(0,0,0,0.6);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 500;
+      gap: 4px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      flex: 1;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-item i {
+      font-size: 1.25rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-item.active, .nav-item:hover {
+      color: var(--primary-gold);
+    }
+
+    .nav-item.active i {
+      transform: translateY(-3px) scale(1.15);
+      color: var(--primary-gold);
+    }
+
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 32px;
+      height: 3px;
+      background: var(--gold-metallic);
+      border-radius: 0 0 4px 4px;
     }
 
     .container {
@@ -539,7 +607,7 @@
 <div class="container">
   
   <!-- Header Banner -->
-  <div class="header-card">
+  <div id="sec-info" class="header-card">
     <div class="badge-early">
       <i class="fa-solid fa-gift"></i> พิเศษ 50 คนแรก รับพวงกุญแจ 1828 ฟรี! 1 ชิ้น
     </div>
@@ -583,7 +651,7 @@
   <form id="bookingForm">
 
     <!-- Section 1: Personal Info -->
-    <div class="form-section">
+    <div id="sec-register" class="form-section">
       <div class="section-header">
         <i class="fa-solid fa-user-gear"></i> 1. ข้อมูลผู้ลงทะเบียน
       </div>
@@ -633,7 +701,7 @@
     </div>
 
     <!-- Section 3: Main Shirt Size -->
-    <div class="form-section">
+    <div id="sec-size" class="form-section">
       <div class="section-header" style="justify-content: space-between;">
         <span><i class="fa-solid fa-shirt"></i> 3. ไซส์เสื้อโปโล WARRIX (แถมฟรีในแพ็กเกจ 1 ตัว)</span>
         <button type="button" class="size-chart-btn" onclick="openSizeChartModal()">
@@ -724,7 +792,7 @@
     </div>
 
     <!-- Payment Account Section -->
-    <div class="payment-box">
+    <div id="sec-payment" class="payment-box">
       <div class="bank-logo">SCB</div>
       <p style="font-size: 0.9rem; color: var(--text-muted);">โอนเงินเข้าบัญชี ธนาคารไทยพาณิชย์ (SCB)</p>
       <div class="account-number">
@@ -1068,6 +1136,60 @@
 
   // Initialize page
   renderPackages();
+
+  // Mobile Bottom Nav Switching
+  function switchNav(elem, targetId) {
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    elem.classList.add('active');
+    if (targetId) {
+      const targetElem = document.getElementById(targetId);
+      if (targetElem) {
+        targetElem.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  // Auto active tab highlight on scroll
+  window.addEventListener('scroll', () => {
+    const sections = ['sec-info', 'sec-register', 'sec-size', 'sec-payment'];
+    const scrollPos = window.scrollY + 200;
+
+    sections.forEach(secId => {
+      const el = document.getElementById(secId);
+      if (el) {
+        const top = el.offsetTop;
+        const height = el.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          const navBtn = document.querySelector(`.nav-item[data-target="${secId}"]`);
+          if (navBtn) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            navBtn.classList.add('active');
+          }
+        }
+      }
+    });
+  });
 </script>
+
+<!-- Mobile Bottom Navigation Bar -->
+<nav class="mobile-bottom-nav">
+  <a class="nav-item active" data-target="sec-info" onclick="switchNav(this, 'sec-info')">
+    <i class="fa-solid fa-house"></i>
+    <span>หน้าแรก</span>
+  </a>
+  <a class="nav-item" data-target="sec-register" onclick="switchNav(this, 'sec-register')">
+    <i class="fa-solid fa-pen-to-square"></i>
+    <span>ลงทะเบียน</span>
+  </a>
+  <a class="nav-item" data-target="sec-size" onclick="openSizeChartModal(); switchNav(this)">
+    <i class="fa-solid fa-shirt"></i>
+    <span>ตารางไซส์</span>
+  </a>
+  <a class="nav-item" data-target="sec-payment" onclick="switchNav(this, 'sec-payment')">
+    <i class="fa-solid fa-wallet"></i>
+    <span>ชำระเงิน</span>
+  </a>
+</nav>
+
 </body>
 </html>
