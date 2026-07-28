@@ -7,8 +7,17 @@ const SPREADSHEET_ID = "1N4E2U1sXdU7HMCDASg5s8hxceXLJ_aRigan-pYsh-p0";
 const SHEET_NAME = "รายการจอง";
 
 function doGet(e) {
-  return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "NCO.1828 Booking Web App API is running" }))
-    .setMimeType(ContentService.MimeType.JSON);
+  // If index.html exists in Google Apps Script files, serve it as Web App interface
+  try {
+    return HtmlService.createHtmlOutputFromFile('index')
+      .setTitle('ลงทะเบียนงานเลี้ยงรุ่น NCO.1828 เหล่าทหารปืนใหญ่')
+      .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  } catch (err) {
+    // Fallback JSON API output
+    return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "NCO.1828 Booking Web App API is running" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
 function doPost(e) {
