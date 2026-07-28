@@ -662,6 +662,11 @@
       </div>
 
       <div class="form-group">
+        <label>อีเมลสำหรับรับใบยืนยันการจอง <span class="required">*</span></label>
+        <input type="email" id="email" class="input-control" placeholder="เช่น somchai@gmail.com" required>
+      </div>
+
+      <div class="form-group">
         <label>เบอร์โทรศัพท์ติดต่อ <span class="required">*</span></label>
         <input type="tel" id="phone" class="input-control" placeholder="เช่น 0891234567" pattern="[0-9]{9,10}" required>
       </div>
@@ -815,10 +820,31 @@
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" id="submitBtn" class="btn-submit">
+    <button type="submit" id="submitBtn" class="btn-submit" style="margin-bottom: 25px;">
       <i class="fa-solid fa-paper-plane"></i> ยืนยันการลงทะเบียนและโอนเงิน
     </button>
   </form>
+
+  <!-- Section 8: Search Registration Status -->
+  <div id="sec-check" class="form-section">
+    <div class="section-header">
+      <i class="fa-solid fa-magnifying-glass-location"></i> ตรวจสอบสถานะ / รายชื่อผู้ลงทะเบียน
+    </div>
+    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px;">
+      พิมพ์ยศ ชื่อ นามสกุล หรือเบอร์โทรศัพท์ เพื่อตรวจสอบสถานะการจองและไซส์เสื้อของคุณ
+    </p>
+
+    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+      <input type="text" id="searchKeyword" class="input-control" placeholder="พิมพ์ชื่อ นามสกุล หรือเบอร์โทร..." onkeyup="if(event.key==='Enter') searchRegistrations()">
+      <button type="button" class="btn-add-shirt" style="background: var(--gold-metallic); color: #000; font-weight: 700; border: none; padding: 0 18px; white-space: nowrap;" onclick="searchRegistrations()">
+        <i class="fa-solid fa-magnifying-glass"></i> ค้นหา
+      </button>
+    </div>
+
+    <div id="searchResultsContainer">
+      <!-- Dynamic Search Results -->
+    </div>
+  </div>
 
 </div>
 
@@ -1065,6 +1091,7 @@
     const totalAmount = calculateTotal();
     const payload = {
       fullName: document.getElementById("fullName").value,
+      email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
       memberStatus: document.querySelector('input[name="memberStatus"]:checked').value,
       packageSelected: document.querySelector('input[name="packageSelected"]:checked').value,
@@ -1151,7 +1178,7 @@
 
   // Auto active tab highlight on scroll
   window.addEventListener('scroll', () => {
-    const sections = ['sec-info', 'sec-register', 'sec-size', 'sec-payment'];
+    const sections = ['sec-info', 'sec-register', 'sec-size', 'sec-payment', 'sec-check'];
     const scrollPos = window.scrollY + 200;
 
     sections.forEach(secId => {
@@ -1169,6 +1196,45 @@
       }
     });
   });
+
+  // Search Registration Status Function
+  function searchRegistrations() {
+    const keyword = document.getElementById("searchKeyword").value.trim();
+    const container = document.getElementById("searchResultsContainer");
+
+    container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--primary-gold);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p style="margin-top: 10px;">กำลังค้นหาข้อมูล...</p></div>`;
+
+    fetch(SCRIPT_URL + "?action=search&keyword=" + encodeURIComponent(keyword))
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "success" && res.data && res.data.length > 0) {
+          container.innerHTML = res.data.map((item, idx) => `
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 10px;">
+                <span style="font-weight: 700; font-size: 1.05rem; color: #fff;">${idx + 1}. ${item.fullName}</span>
+                <span style="background: rgba(34,197,94,0.2); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 3px 10px; border-radius: 12px; font-size: 0.78rem;">
+                  <i class="fa-solid fa-circle-check"></i> ${item.paymentStatus}
+                </span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; font-size: 0.88rem; color: #cbd5e1;">
+                <div><strong style="color:var(--text-muted);">เบอร์โทร:</strong> ${item.phoneMasked}</div>
+                <div><strong style="color:var(--text-muted);">สถานะ:</strong> ${item.memberStatus}</div>
+                <div><strong style="color:var(--text-muted);">แพ็กเกจ:</strong> ${item.packageSelected}</div>
+                <div><strong style="color:var(--text-muted);">ไซส์เสื้อหลัก:</strong> <span style="color:var(--primary-gold); font-weight:700;">${item.mainShirtSize}</span></div>
+                <div><strong style="color:var(--text-muted);">ผู้ติดตาม:</strong> ${item.followerCount} คน (${item.followerRoom})</div>
+                <div><strong style="color:var(--text-muted);">เสื้อสั่งเพิ่ม:</strong> ${item.extraShirts}</div>
+                <div><strong style="color:var(--text-muted);">ยอดชำระเงิน:</strong> <span style="color:var(--accent-green); font-weight:700;">${item.totalAmount.toLocaleString()} บาท</span></div>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted);"><i class="fa-regular fa-folder-open fa-2x"></i><p style="margin-top: 10px;">ไม่พบข้อมูลรายชื่อที่ลงทะเบียนตามคำค้นหา</p></div>`;
+        }
+      })
+      .catch(err => {
+        container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--accent-red);"><i class="fa-solid fa-triangle-exclamation fa-2x"></i><p style="margin-top: 10px;">เกิดข้อผิดพลาดในการดึงข้อมูล</p></div>`;
+      });
+  }
 </script>
 
 <!-- Mobile Bottom Navigation Bar -->
@@ -1188,6 +1254,10 @@
   <a class="nav-item" data-target="sec-payment" onclick="switchNav(this, 'sec-payment')">
     <i class="fa-solid fa-wallet"></i>
     <span>ชำระเงิน</span>
+  </a>
+  <a class="nav-item" data-target="sec-check" onclick="switchNav(this, 'sec-check'); searchRegistrations()">
+    <i class="fa-solid fa-user-check"></i>
+    <span>เช็กรายชื่อ</span>
   </a>
 </nav>
 
