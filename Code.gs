@@ -32,16 +32,30 @@ function doGet(e) {
         const row = rows[i];
         const timestamp = row[0] || "";
         const name = String(row[1] || "");
-        const email = String(row[2] || "");
-        const phone = String(row[3] || "");
-        const memberStatus = row[4] || "";
-        const packageSelected = row[5] || "";
-        const mainShirtSize = row[6] || "";
-        const followerCount = row[7] || 0;
-        const followerRoom = row[8] || "";
-        const extraShirts = row[9] || "ไม่มี";
-        const totalAmount = row[10] || 0;
-        const paymentStatus = row[11] || "ลงทะเบียนแล้ว (รอตรวจสอบสลิป)";
+        
+        let email = "";
+        let phone = "";
+        let offset = 0;
+
+        if (String(row[2] || "").includes("@")) {
+          email = String(row[2] || "");
+          phone = String(row[3] || "");
+          offset = 0;
+        } else {
+          // Legacy row without email column
+          email = "-";
+          phone = String(row[2] || "");
+          offset = -1;
+        }
+
+        const memberStatus = row[4 + offset] || "";
+        const packageSelected = row[5 + offset] || "";
+        const mainShirtSize = row[6 + offset] || "";
+        const followerCount = row[7 + offset] || 0;
+        const followerRoom = row[8 + offset] || "";
+        const extraShirts = row[9 + offset] || "ไม่มี";
+        const totalAmount = row[10 + offset] || 0;
+        const paymentStatus = row[11 + offset] || "ลงทะเบียนแล้ว (รอตรวจสอบสลิป)";
 
         // Filter if keyword provided
         if (keyword) {
