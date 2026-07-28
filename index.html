@@ -105,6 +105,45 @@
       border-radius: 0 0 4px 4px;
     }
 
+    /* Poster Image Gallery Styles */
+    .poster-banner-wrapper {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .poster-banner-wrapper:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.35);
+    }
+
+    .poster-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .poster-zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(11, 19, 38, 0.85);
+      border: 1px solid var(--primary-gold);
+      color: var(--primary-gold);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      backdrop-filter: blur(5px);
+      pointer-events: none;
+    }
+
     .container {
       max-width: 800px;
       margin: 0 auto;
@@ -608,6 +647,12 @@
   
   <!-- Header Banner -->
   <div id="sec-info" class="header-card">
+    
+    <div class="poster-banner-wrapper" onclick="openImageModal('S__7159863.jpg', 'โปสเตอร์ประชาสัมพันธ์งานเลี้ยงรุ่น NCO.1828')">
+      <img src="S__7159863.jpg" alt="โปสเตอร์งานเลี้ยงรุ่น NCO.1828" class="poster-img">
+      <span class="poster-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> แตะเพื่อดูภาพขยาย</span>
+    </div>
+
     <div class="badge-early">
       <i class="fa-solid fa-gift"></i> พิเศษ 50 คนแรก รับพวงกุญแจ 1828 ฟรี! 1 ชิ้น
     </div>
@@ -699,6 +744,12 @@
 
       <div class="form-group">
         <label>เลือกแพ็กเกจการเข้าร่วม <span class="required">*</span></label>
+        
+        <div class="poster-banner-wrapper" style="margin-top: 10px; margin-bottom: 15px;" onclick="openImageModal('S__7159861.jpg', 'รายละเอียดอัตราค่าลงทะเบียนและพวงกุญแจที่ระลึก')">
+          <img src="S__7159861.jpg" alt="โปสเตอร์รายละเอียดแพ็กเกจ และของรางวัล" class="poster-img">
+          <span class="poster-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> แตะดูโปสเตอร์แพ็กเกจเต็ม</span>
+        </div>
+
         <div id="packageContainer" class="radio-grid">
           <!-- Dynamic Packages rendered via JS -->
         </div>
@@ -712,6 +763,11 @@
         <button type="button" class="size-chart-btn" onclick="openSizeChartModal()">
           <i class="fa-solid fa-ruler-combined"></i> ตารางไซส์
         </button>
+      </div>
+
+      <div class="poster-banner-wrapper" style="margin-top: 10px; margin-bottom: 15px;" onclick="openImageModal('S__7159857.jpg', 'แบบเสื้อโปโล WARRIX 1828 Artillery และตารางไซส์')">
+        <img src="S__7159857.jpg" alt="แบบเสื้อโปโล WARRIX 1828 Artillery" class="poster-img">
+        <span class="poster-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> แตะดูแบบเสื้อและตารางไซส์</span>
       </div>
 
       <div class="form-group">
@@ -853,8 +909,11 @@
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('sizeChartModal')">&times;</button>
     <h3 style="font-family: 'Prompt'; color: var(--primary-gold); margin-bottom: 15px; text-align: center;">
-      ตารางไซส์เสื้อโปโล WARRIX (1828 Artillery)
+      แบบเสื้อ & ตารางไซส์เสื้อโปโล WARRIX
     </h3>
+    <div class="poster-banner-wrapper" style="margin-bottom: 15px;" onclick="openImageModal('S__7159857.jpg', 'แบบเสื้อโปโล WARRIX 1828 Artillery')">
+      <img src="S__7159857.jpg" alt="แบบเสื้อและตารางไซส์" class="poster-img">
+    </div>
     <table style="width: 100%; border-collapse: collapse; text-align: center; color: #fff; font-size: 0.9rem;">
       <thead>
         <tr style="background: var(--primary-gold); color: #000;">
@@ -886,6 +945,15 @@
     <h3 id="modalStatusTitle" style="font-family: 'Prompt'; font-size: 1.4rem; margin-bottom: 10px;"></h3>
     <p id="modalStatusDesc" style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;"></p>
     <button class="btn-submit" onclick="closeModal('statusModal')">ตกลง</button>
+  </div>
+</div>
+
+<!-- Modal 3: Fullscreen Image Viewer -->
+<div id="imageViewerModal" class="modal" onclick="closeModal('imageViewerModal')">
+  <div class="modal-content" style="max-width: 92vw; background: transparent; border: none; padding: 0; text-align: center;" onclick="event.stopPropagation()">
+    <button class="modal-close" style="top: -40px; right: 0; font-size: 2.2rem; color: #fff;" onclick="closeModal('imageViewerModal')">&times;</button>
+    <img id="modalViewerImg" src="" alt="ภาพขยาย" style="max-width: 100%; max-height: 82vh; border-radius: 12px; border: 2px solid var(--primary-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.9);">
+    <p id="modalViewerCaption" style="color: var(--primary-gold); font-weight: 600; margin-top: 12px; font-size: 1rem; font-family:'Prompt';"></p>
   </div>
 </div>
 
@@ -1159,6 +1227,13 @@
     document.getElementById("modalStatusTitle").innerText = title;
     document.getElementById("modalStatusDesc").innerHTML = desc;
     modal.style.display = "flex";
+  }
+
+  // Fullscreen Image Lightbox Modal
+  function openImageModal(imgSrc, caption) {
+    document.getElementById("modalViewerImg").src = imgSrc;
+    document.getElementById("modalViewerCaption").innerText = caption || "";
+    document.getElementById("imageViewerModal").style.display = "flex";
   }
 
   // Initialize page
