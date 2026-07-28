@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ลงทะเบียนงานเลี้ยงรุ่น NCO.1828 เหล่าทหารปืนใหญ่</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-gold: #d4af37;
+      --gold-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      --gold-metallic: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+      --bg-dark: #0b1326;
+      --bg-card: rgba(18, 30, 58, 0.85);
+      --border-color: rgba(212, 175, 55, 0.3);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-red: #ef4444;
+      --accent-green: #22c55e;
+      --shadow-gold: 0 10px 25px -5px rgba(212, 175, 55, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: radial-gradient(circle at top center, #1a2b4c 0%, #080d1a 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 20px 10px 60px 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Header Banner Section */
+    .header-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gold-metallic);
+    }
+
+    .badge-early {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    .header-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      color: #e2e8f0;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .event-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 12px;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .info-box i {
+      font-size: 1.4rem;
+      color: var(--primary-gold);
+    }
+
+    .info-box div label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .info-box div span {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Benefits Pills */
+    .benefits-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .benefit-tag {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--border-color);
+      color: #fce7f3;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .benefit-tag i {
+      color: var(--primary-gold);
+    }
+
+    /* Section Cards */
+    .form-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary-gold);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #e2e8f0;
+    }
+
+    .form-group label .required {
+      color: var(--accent-red);
+    }
+
+    .input-control, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .input-control:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+
+    /* Radio Card Options */
+    .radio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .radio-card {
+      position: relative;
+    }
+
+    .radio-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-card-content {
+      display: flex;
+      flex-direction: column;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .radio-card input[type="radio"]:checked + .radio-card-content {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--primary-gold);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .radio-title {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .radio-price {
+      color: var(--primary-gold);
+      font-family: 'Prompt', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .radio-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Size Chart Table & Modal Trigger */
+    .size-chart-btn {
+      background: transparent;
+      border: 1px dashed var(--primary-gold);
+      color: var(--primary-gold);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+
+    .size-chart-btn:hover {
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    .shirt-size-grid {
+      display: grid;
+      grid-template-columns: repeat( auto-fill, minmax(80px, 1fr) );
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .size-btn {
+      position: relative;
+    }
+
+    .size-btn input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .size-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 5px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .size-btn input[type="radio"]:checked + .size-box {
+      background: var(--primary-gold);
+      color: #000;
+      font-weight: 700;
+      border-color: var(--primary-gold);
+    }
+
+    .size-name {
+      font-family: 'Prompt', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .size-chest {
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+
+    /* Extra Shirt Item row */
+    .extra-shirt-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .btn-add-shirt {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+
+    .btn-add-shirt:hover {
+      background: rgba(34, 197, 94, 0.3);
+    }
+
+    .btn-remove-shirt {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid var(--accent-red);
+      color: var(--accent-red);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Summary Card */
+    .summary-box {
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(15, 23, 42, 0.9));
+      border: 2px solid var(--primary-gold);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      font-size: 0.95rem;
+    }
+
+    .summary-row.total {
+      border-bottom: none;
+      padding-top: 15px;
+      margin-top: 5px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+    }
+
+    /* Payment Box */
+    .payment-box {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .bank-logo {
+      width: 50px;
+      height: 50px;
+      background: #4e2a84; /* SCB Purple */
+      color: #fff;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .account-number {
+      font-family: 'Prompt', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      letter-spacing: 1px;
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-copy {
+      background: rgba(212, 175, 55, 0.2);
+      border: none;
+      color: var(--primary-gold);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--gold-metallic);
+      border: none;
+      border-radius: 12px;
+      color: #000;
+      font-family: 'Prompt', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Modal styling */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: #0f172a;
+      border: 1px solid var(--primary-gold);
+      border-radius: 20px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 25px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Slip Preview */
+    .slip-preview {
+      max-width: 200px;
+      max-height: 250px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: none;
+      border: 1px solid var(--primary-gold);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header Banner -->
+  <div class="header-card">
+    <div class="badge-early">
+      <i class="fa-solid fa-gift"></i> พิเศษ 50 คนแรก รับพวงกุญแจ 1828 ฟรี! 1 ชิ้น
+    </div>
+    <h1 class="header-title">ขอเชิญร่วมงานเลี้ยงรุ่น NCO.1828 เหล่าทหารปืนใหญ่</h1>
+    <p class="header-subtitle">"กลับบ้านที่ลพบุรี แหล่งกำเนิดของพวกเราทุกคน"</p>
+    
+    <div class="event-info-grid">
+      <div class="info-box">
+        <i class="fa-regular fa-calendar-check"></i>
+        <div>
+          <label>วันจัดงาน</label>
+          <span>วันศุกร์ที่ 19 กุมภาพันธ์ 2570</span>
+        </div>
+      </div>
+      <div class="info-box">
+        <i class="fa-solid fa-location-dot"></i>
+        <div>
+          <label>สถานที่</label>
+          <span>โรงแรมโตเกียว จ.ลพบุรี</span>
+        </div>
+      </div>
+      <div class="info-box">
+        <i class="fa-solid fa-clock"></i>
+        <div>
+          <label>ช่วงเวลาเปิดลงทะเบียน</label>
+          <span>1 ส.ค. - 31 ธ.ค. 2569</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefits-list">
+      <span class="benefit-tag"><i class="fa-solid fa-vest"></i> ฟรี เสื้อโปโล WARRIX 1 ตัว</span>
+      <span class="benefit-tag"><i class="fa-solid fa-utensils"></i> อาหารเย็น 1 มื้อ + เช้า 1 มื้อ</span>
+      <span class="benefit-tag"><i class="fa-solid fa-trophy"></i> ชิงของรางวัล 10,000 บ.</span>
+      <span class="benefit-tag"><i class="fa-solid fa-gas-pump"></i> ชิงโชคค่าน้ำมัน 10,000 บ.</span>
+      <span class="benefit-tag"><i class="fa-solid fa-shirt"></i> ธีมงาน: แต่งไทย งานแผ่นดินสมเด็จพระนารายณ์</span>
+    </div>
+  </div>
+
+  <!-- Form Start -->
+  <form id="bookingForm">
+
+    <!-- Section 1: Personal Info -->
+    <div class="form-section">
+      <div class="section-header">
+        <i class="fa-solid fa-user-gear"></i> 1. ข้อมูลผู้ลงทะเบียน
+      </div>
+      
+      <div class="form-group">
+        <label>ยศ - ชื่อ-นามสกุล <span class="required">*</span></label>
+        <input type="text" id="fullName" class="input-control" placeholder="เช่น จ.ส.อ. สมชาย ใจดี" required>
+      </div>
+
+      <div class="form-group">
+        <label>เบอร์โทรศัพท์ติดต่อ <span class="required">*</span></label>
+        <input type="tel" id="phone" class="input-control" placeholder="เช่น 0891234567" pattern="[0-9]{9,10}" required>
+      </div>
+    </div>
+
+    <!-- Section 2: Membership & Package -->
+    <div class="form-section">
+      <div class="section-header">
+        <i class="fa-solid fa-id-card"></i> 2. สถานะสมาชิก & แพ็กเกจเข้าร่วม
+      </div>
+
+      <div class="form-group">
+        <label>สถานะสมาชิก <span class="required">*</span></label>
+        <div class="radio-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 15px;">
+          <label class="radio-card">
+            <input type="radio" name="memberStatus" value="เป็นสมาชิก" checked onchange="renderPackages()">
+            <div class="radio-card-content">
+              <span class="radio-title"><i class="fa-solid fa-circle-check" style="color:var(--accent-green)"></i> เป็นสมาชิก 1828</span>
+            </div>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="memberStatus" value="ไม่เป็นสมาชิก" onchange="renderPackages()">
+            <div class="radio-card-content">
+              <span class="radio-title"><i class="fa-solid fa-user-large"></i> ไม่เป็นสมาชิก</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>เลือกแพ็กเกจการเข้าร่วม <span class="required">*</span></label>
+        <div id="packageContainer" class="radio-grid">
+          <!-- Dynamic Packages rendered via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Main Shirt Size -->
+    <div class="form-section">
+      <div class="section-header" style="justify-content: space-between;">
+        <span><i class="fa-solid fa-shirt"></i> 3. ไซส์เสื้อโปโล WARRIX (แถมฟรีในแพ็กเกจ 1 ตัว)</span>
+        <button type="button" class="size-chart-btn" onclick="openSizeChartModal()">
+          <i class="fa-solid fa-ruler-combined"></i> ตารางไซส์
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>เลือกไซส์เสื้อหลักของคุณ <span class="required">*</span></label>
+        <div class="shirt-size-grid">
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="XS" checked><div class="size-box"><span class="size-name">XS</span><span class="size-chest">36"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="S"><div class="size-box"><span class="size-name">S</span><span class="size-chest">38"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="M"><div class="size-box"><span class="size-name">M</span><span class="size-chest">40"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="L"><div class="size-box"><span class="size-name">L</span><span class="size-chest">42"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="XL"><div class="size-box"><span class="size-name">XL</span><span class="size-chest">44"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="2L"><div class="size-box"><span class="size-name">2L</span><span class="size-chest">46"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="3L"><div class="size-box"><span class="size-name">3L</span><span class="size-chest">48"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="5L"><div class="size-box"><span class="size-name">5L</span><span class="size-chest">52"</span></div></label>
+          <label class="size-btn"><input type="radio" name="mainShirtSize" value="7L"><div class="size-box"><span class="size-name">7L</span><span class="size-chest">56"</span></div></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Followers & Additional Rooms -->
+    <div class="form-section">
+      <div class="section-header">
+        <i class="fa-solid fa-users"></i> 4. ผู้ติดตามเพิ่มเติม (ถ้ามี)
+      </div>
+
+      <div class="form-group">
+        <label>จำนวนผู้ติดตาม (200 บาท / คน)</label>
+        <select id="followerCount" onchange="calculateTotal()">
+          <option value="0">ไม่มีผู้ติดตาม</option>
+          <option value="1">1 คน (+200 บ.)</option>
+          <option value="2">2 คน (+400 บ.)</option>
+          <option value="3">3 คน (+600 บ.)</option>
+          <option value="4">4 คน (+800 บ.)</option>
+        </select>
+      </div>
+
+      <div id="followerRoomGroup" class="form-group" style="display: none;">
+        <label>
+          <input type="checkbox" id="followerRoomCheck" onchange="calculateTotal()" style="width: auto; margin-right: 8px;">
+          เพิ่มห้องพักสำหรับผู้ติดตาม (+200 บาท / คน รวมเป็น 400 บ./คน)
+        </label>
+      </div>
+    </div>
+
+    <!-- Section 5: Order Extra Shirts -->
+    <div class="form-section">
+      <div class="section-header" style="justify-content: space-between;">
+        <span><i class="fa-solid fa-cart-plus"></i> 5. สั่งซื้อเสื้อโปโล WARRIX เพิ่มเติม</span>
+        <button type="button" class="btn-add-shirt" onclick="addExtraShirtRow()">
+          <i class="fa-solid fa-plus"></i> เพิ่มรายการเสื้อ
+        </button>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+        *ราคาเสื้อสั่งเพิ่ม: ไซส์ XS - 3L ตัวละ 330 บาท | ไซส์ 5L, 7L ตัวละ 400 บาท
+      </p>
+
+      <div id="extraShirtsContainer">
+        <!-- Dynamic Extra Shirts list -->
+      </div>
+    </div>
+
+    <!-- Section 6: Notes -->
+    <div class="form-section">
+      <div class="section-header">
+        <i class="fa-regular fa-comment-dots"></i> 6. หมายเหตุ / คำขอพิเศษ
+      </div>
+      <div class="form-group">
+        <textarea id="note" rows="3" placeholder="ระบุข้อความเพิ่มเติม (ถ้ามี)"></textarea>
+      </div>
+    </div>
+
+    <!-- Section 7: Summary & Payment -->
+    <div class="summary-box">
+      <h3 style="font-family: 'Prompt'; color: var(--primary-gold); margin-bottom: 15px;">
+        <i class="fa-solid fa-calculator"></i> สรุปยอดชำระเงิน
+      </h3>
+      <div id="summaryDetails">
+        <!-- Dynamic Summary Lines -->
+      </div>
+      <div class="summary-row total">
+        <span>ยอดรวมสุทธิ</span>
+        <span id="totalAmountDisplay">0 บาท</span>
+      </div>
+    </div>
+
+    <!-- Payment Account Section -->
+    <div class="payment-box">
+      <div class="bank-logo">SCB</div>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">โอนเงินเข้าบัญชี ธนาคารไทยพาณิชย์ (SCB)</p>
+      <div class="account-number">
+        560-286-0945
+        <button type="button" class="btn-copy" onclick="copyAccount()"><i class="fa-regular fa-copy"></i> คัดลอก</button>
+      </div>
+      <p style="font-weight: 600; color: #fff;">ชื่อบัญชี: ร.ต.วันชัย มีชาญ</p>
+      <p style="font-size: 0.85rem; color: var(--primary-gold); margin-top: 5px;"><i class="fa-solid fa-phone"></i> สอบถามเพิ่มเติม โทร: 089-208-1550</p>
+    </div>
+
+    <!-- Slip Upload Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <i class="fa-solid fa-file-invoice-dollar"></i> แนบหลักฐานการโอนเงิน (สลิป) <span class="required">*</span>
+      </div>
+      <div class="form-group">
+        <input type="file" id="slipInput" accept="image/*" class="input-control" onchange="previewSlip(this)" required>
+        <img id="slipPreviewImg" class="slip-preview" alt="ตัวอย่างสลิป">
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" id="submitBtn" class="btn-submit">
+      <i class="fa-solid fa-paper-plane"></i> ยืนยันการลงทะเบียนและโอนเงิน
+    </button>
+  </form>
+
+</div>
+
+<!-- Modal 1: Size Chart -->
+<div id="sizeChartModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('sizeChartModal')">&times;</button>
+    <h3 style="font-family: 'Prompt'; color: var(--primary-gold); margin-bottom: 15px; text-align: center;">
+      ตารางไซส์เสื้อโปโล WARRIX (1828 Artillery)
+    </h3>
+    <table style="width: 100%; border-collapse: collapse; text-align: center; color: #fff; font-size: 0.9rem;">
+      <thead>
+        <tr style="background: var(--primary-gold); color: #000;">
+          <th style="padding: 10px; border: 1px solid #444;">ขนาด (นิ้ว)</th>
+          <th style="padding: 10px; border: 1px solid #444;">รอบอก</th>
+          <th style="padding: 10px; border: 1px solid #444;">ยาว</th>
+          <th style="padding: 10px; border: 1px solid #444;">ราคาสั่งเพิ่ม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding: 8px; border: 1px solid #333;">XS</td><td>36"</td><td>25"</td><td>330 บ.</td></tr>
+        <tr style="background: rgba(255,255,255,0.05);"><td style="padding: 8px; border: 1px solid #333;">S</td><td>38"</td><td>26"</td><td>330 บ.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid #333;">M</td><td>40"</td><td>27"</td><td>330 บ.</td></tr>
+        <tr style="background: rgba(255,255,255,0.05);"><td style="padding: 8px; border: 1px solid #333;">L</td><td>42"</td><td>28"</td><td>330 บ.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid #333;">XL</td><td>44"</td><td>29"</td><td>330 บ.</td></tr>
+        <tr style="background: rgba(255,255,255,0.05);"><td style="padding: 8px; border: 1px solid #333;">2L</td><td>46"</td><td>30"</td><td>330 บ.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid #333;">3L</td><td>48"</td><td>31"</td><td>330 บ.</td></tr>
+        <tr style="background: rgba(212,175,55,0.2);"><td style="padding: 8px; border: 1px solid #333; font-weight:700;">5L</td><td>52"</td><td>32"</td><td style="color:var(--primary-gold); font-weight:700;">400 บ.</td></tr>
+        <tr style="background: rgba(212,175,55,0.2);"><td style="padding: 8px; border: 1px solid #333; font-weight:700;">7L</td><td>56"</td><td>33"</td><td style="color:var(--primary-gold); font-weight:700;">400 บ.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal 2: Submission Status -->
+<div id="statusModal" class="modal">
+  <div class="modal-content" style="text-align: center;">
+    <div id="modalStatusIcon" style="font-size: 3.5rem; margin-bottom: 15px;"></div>
+    <h3 id="modalStatusTitle" style="font-family: 'Prompt'; font-size: 1.4rem; margin-bottom: 10px;"></h3>
+    <p id="modalStatusDesc" style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;"></p>
+    <button class="btn-submit" onclick="closeModal('statusModal')">ตกลง</button>
+  </div>
+</div>
+
+<script>
+  // Google Apps Script Web App Endpoint URL ( REPLACE THIS AFTER DEPLOYING APPS SCRIPT )
+  const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+
+  // Package definitions
+  const memberPackages = [
+    { id: "m1", title: "คนเดียว (ไม่เอาห้องพัก)", price: 800, desc: "สำหรับสมาชิก 1 ท่าน รวมบัตรผ่านและเสื้อ 1 ตัว" },
+    { id: "m2", title: "2 คน (ไม่เอาห้องพัก)", price: 1000, desc: "สำหรับสมาชิกและคู่สมรส/ผู้ติดตาม 2 ท่าน (ไม่รับห้อง)" },
+    { id: "m3", title: "คนเดียว (พร้อมห้องพัก)", price: 1300, desc: "สำหรับสมาชิก 1 ท่าน รวมห้องพักโรงแรมโตเกียว" },
+    { id: "m4", title: "2 คน (พร้อมห้องพัก)", price: 1500, desc: "สำหรับ 2 ท่าน รวมห้องพักโรงแรมโตเกียว 1 ห้อง" }
+  ];
+
+  const nonMemberPackages = [
+    { id: "nm1", title: "คนเดียว", price: 1500, desc: "สำหรับผู้ไม่ได้เป็นสมาชิก 1 ท่าน" },
+    { id: "nm2", title: "2 คน", price: 2000, desc: "สำหรับผู้ไม่ได้เป็นสมาชิก 2 ท่าน" }
+  ];
+
+  let slipBase64 = "";
+
+  // Render packages on load & change
+  function renderPackages() {
+    const isMember = document.querySelector('input[name="memberStatus"]:checked').value === "เป็นสมาชิก";
+    const container = document.getElementById("packageContainer");
+    const packages = isMember ? memberPackages : nonMemberPackages;
+
+    container.innerHTML = packages.map((pkg, idx) => `
+      <label class="radio-card">
+        <input type="radio" name="packageSelected" value="${pkg.title} (${pkg.price} บ.)" data-price="${pkg.price}" ${idx === 0 ? 'checked' : ''} onchange="calculateTotal()">
+        <div class="radio-card-content">
+          <span class="radio-title">
+            <span>${pkg.title}</span>
+            <span class="radio-price">${pkg.price.toLocaleString()} ฿</span>
+          </span>
+          <span class="radio-desc">${pkg.desc}</span>
+        </div>
+      </label>
+    `).join('');
+
+    calculateTotal();
+  }
+
+  // Add extra shirt row
+  function addExtraShirtRow() {
+    const container = document.getElementById("extraShirtsContainer");
+    const rowId = "shirt_" + Date.now();
+    const div = document.createElement("div");
+    div.className = "extra-shirt-row";
+    div.id = rowId;
+    div.innerHTML = `
+      <select class="extra-shirt-size input-control" style="flex: 2;" onchange="calculateTotal()">
+        <option value="XS" data-price="330">XS (36") - 330 บ.</option>
+        <option value="S" data-price="330">S (38") - 330 บ.</option>
+        <option value="M" data-price="330">M (40") - 330 บ.</option>
+        <option value="L" data-price="330">L (42") - 330 บ.</option>
+        <option value="XL" data-price="330">XL (44") - 330 บ.</option>
+        <option value="2L" data-price="330">2L (46") - 330 บ.</option>
+        <option value="3L" data-price="330">3L (48") - 330 บ.</option>
+        <option value="5L" data-price="400">5L (52") - 400 บ.</option>
+        <option value="7L" data-price="400">7L (56") - 400 บ.</option>
+      </select>
+      <input type="number" class="extra-shirt-qty input-control" style="flex: 1;" value="1" min="1" max="10" onchange="calculateTotal()" onkeyup="calculateTotal()">
+      <button type="button" class="btn-remove-shirt" onclick="removeExtraShirtRow('${rowId}')"><i class="fa-solid fa-trash-can"></i></button>
+    `;
+    container.appendChild(div);
+    calculateTotal();
+  }
+
+  function removeExtraShirtRow(rowId) {
+    const row = document.getElementById(rowId);
+    if (row) row.remove();
+    calculateTotal();
+  }
+
+  // Calculation Logic
+  function calculateTotal() {
+    const summaryContainer = document.getElementById("summaryDetails");
+    let html = "";
+    let grandTotal = 0;
+
+    // 1. Package price
+    const pkgInput = document.querySelector('input[name="packageSelected"]:checked');
+    if (pkgInput) {
+      const pkgPrice = parseInt(pkgInput.getAttribute("data-price")) || 0;
+      grandTotal += pkgPrice;
+      html += `
+        <div class="summary-row">
+          <span>แพ็กเกจ: ${pkgInput.value.split(" (")[0]}</span>
+          <span>${pkgPrice.toLocaleString()} บาท</span>
+        </div>
+      `;
+    }
+
+    // 2. Followers
+    const followerCountSelect = document.getElementById("followerCount");
+    const count = parseInt(followerCountSelect.value) || 0;
+    const roomCheck = document.getElementById("followerRoomCheck");
+    const followerRoomGroup = document.getElementById("followerRoomGroup");
+
+    if (count > 0) {
+      followerRoomGroup.style.display = "block";
+      const pricePerPerson = roomCheck.checked ? 400 : 200;
+      const totalFollowerCost = count * pricePerPerson;
+      grandTotal += totalFollowerCost;
+      html += `
+        <div class="summary-row">
+          <span>ผู้ติดตาม ${count} คน (${roomCheck.checked ? 'พร้อมห้องพัก 400' : 'ไม่รวมห้องพัก 200'}บ./คน)</span>
+          <span>${totalFollowerCost.toLocaleString()} บาท</span>
+        </div>
+      `;
+    } else {
+      followerRoomGroup.style.display = "none";
+    }
+
+    // 3. Extra Shirts
+    const shirtRows = document.querySelectorAll(".extra-shirt-row");
+    let extraShirtsTotal = 0;
+    shirtRows.forEach(row => {
+      const sizeSelect = row.querySelector(".extra-shirt-size");
+      const qtyInput = row.querySelector(".extra-shirt-qty");
+      const price = parseInt(sizeSelect.options[sizeSelect.selectedIndex].getAttribute("data-price"));
+      const qty = parseInt(qtyInput.value) || 0;
+      const cost = price * qty;
+      extraShirtsTotal += cost;
+      if (qty > 0) {
+        html += `
+          <div class="summary-row">
+            <span>เสื้อเพิ่ม (${sizeSelect.value}) x ${qty} ตัว</span>
+            <span>${cost.toLocaleString()} บาท</span>
+          </div>
+        `;
+      }
+    });
+    grandTotal += extraShirtsTotal;
+
+    summaryContainer.innerHTML = html || '<div class="summary-row"><span>ไม่มีรายการ</span><span>0 บาท</span></div>';
+    document.getElementById("totalAmountDisplay").innerText = grandTotal.toLocaleString() + " บาท";
+    return grandTotal;
+  }
+
+  // Preview slip image & encode base64
+  function previewSlip(input) {
+    const file = input.files[0];
+    const preview = document.getElementById("slipPreviewImg");
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        slipBase64 = e.target.result;
+        preview.src = slipBase64;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      slipBase64 = "";
+      preview.style.display = "none";
+    }
+  }
+
+  // Copy account number
+  function copyAccount() {
+    navigator.clipboard.writeText("5602860945");
+    alert("คัดลอกเลขบัญชี 560-286-0945 เรียบร้อยแล้ว");
+  }
+
+  // Modal helpers
+  function openSizeChartModal() {
+    document.getElementById("sizeChartModal").style.display = "flex";
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+  }
+
+  // Helper for summarizing extra shirts string
+  function getExtraShirtsSummary() {
+    const shirtRows = document.querySelectorAll(".extra-shirt-row");
+    const details = [];
+    shirtRows.forEach(row => {
+      const size = row.querySelector(".extra-shirt-size").value;
+      const qty = row.querySelector(".extra-shirt-qty").value;
+      if (qty > 0) {
+        details.push(`${size} (${qty} ตัว)`);
+      }
+    });
+    return details.length > 0 ? details.join(", ") : "ไม่มี";
+  }
+
+  // Submit Handler
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    if (!slipBase64) {
+      alert("กรุณาแนบสลิปการโอนเงินก่อนส่งแบบฟอร์ม");
+      return;
+    }
+
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึกข้อมูล...`;
+
+    const totalAmount = calculateTotal();
+    const payload = {
+      fullName: document.getElementById("fullName").value,
+      phone: document.getElementById("phone").value,
+      memberStatus: document.querySelector('input[name="memberStatus"]:checked').value,
+      packageSelected: document.querySelector('input[name="packageSelected"]:checked').value,
+      mainShirtSize: document.querySelector('input[name="mainShirtSize"]:checked').value,
+      followerCount: document.getElementById("followerCount").value,
+      followerRoom: document.getElementById("followerRoomCheck").checked,
+      extraShirtsDetail: getExtraShirtsSummary(),
+      totalAmount: totalAmount,
+      note: document.getElementById("note").value,
+      slipImage: slipBase64
+    };
+
+    if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") {
+      // Demo / Local test mode notice
+      setTimeout(() => {
+        showStatusModal(
+          "fa-circle-check",
+          "#22c55e",
+          "บันทึกข้อมูลแบบฟอร์มเรียบร้อย!",
+          `คุณได้ลงทะเบียนเข้าร่วมงานเลี้ยงรุ่น NCO.1828 สำเร็จแล้ว (ยอดรวม ${totalAmount.toLocaleString()} บาท)<br><br><small style="color:var(--primary-gold);">*หมายเหตุ: อย่าลืมนำ URL Google Apps Script Web App ที่ได้จากการ Deploy มาใส่ในโค้ดตัวแปร SCRIPT_URL ใน index.html เพื่อส่งข้อมูลเข้า Google Sheets แบบ Real-time</small>`
+        );
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> ยืนยันการลงทะเบียนและโอนเงิน`;
+      }, 1000);
+      return;
+    }
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      showStatusModal(
+        "fa-circle-check",
+        "#22c55e",
+        "ลงทะเบียนสำเร็จเรียบร้อย!",
+        `ขอบคุณสำหรับข้อมูลครับ ทางคณะผู้จัดงาน NCO.1828 ได้รับข้อมูลการจองและสลิปการโอนเงินเรียบร้อยแล้ว`
+      );
+      document.getElementById("bookingForm").reset();
+      renderPackages();
+      document.getElementById("slipPreviewImg").style.display = "none";
+      slipBase64 = "";
+    })
+    .catch(err => {
+      showStatusModal(
+        "fa-circle-xmark",
+        "#ef4444",
+        "เกิดข้อผิดพลาดในการส่งข้อมูล",
+        `โปรดลองอีกครั้งหรือติดต่อสอบถามโทร 089-208-1550 (${err.toString()})`
+      );
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> ยืนยันการลงทะเบียนและโอนเงิน`;
+    });
+  });
+
+  function showStatusModal(iconClass, color, title, desc) {
+    const modal = document.getElementById("statusModal");
+    const icon = document.getElementById("modalStatusIcon");
+    icon.className = `fa-solid ${iconClass}`;
+    icon.style.color = color;
+    document.getElementById("modalStatusTitle").innerText = title;
+    document.getElementById("modalStatusDesc").innerHTML = desc;
+    modal.style.display = "flex";
+  }
+
+  // Initialize page
+  renderPackages();
+</script>
+</body>
+</html>
