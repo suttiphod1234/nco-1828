@@ -846,6 +846,45 @@
       </div>
     </div>
 
+    <!-- Section 6: Payment Options -->
+    <div id="sec-payment-option" class="form-section">
+      <div class="section-header">
+        <i class="fa-solid fa-credit-card"></i> 6. ตัวเลือกการชำระเงิน
+      </div>
+
+      <div class="form-group">
+        <label>เลือกช่วงเวลาชำระเงิน <span class="required">*</span></label>
+        <div class="radio-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 10px;">
+          <label class="radio-card">
+            <input type="radio" name="paymentOption" value="ชำระเงินทันที" checked onchange="togglePaymentOption()">
+            <div class="radio-card-content">
+              <span class="radio-title"><i class="fa-solid fa-money-bill-transfer" style="color:var(--accent-green)"></i> โอนชำระเงินทันที</span>
+              <span class="radio-desc">โอนเงินเข้าบัญชี และแนบสลิปทันที</span>
+            </div>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="paymentOption" value="ไว้ชำระเงินทีหลัง" onchange="togglePaymentOption()">
+            <div class="radio-card-content">
+              <span class="radio-title"><i class="fa-regular fa-clock" style="color:var(--primary-gold)"></i> ไว้ชำระเงินทีหลัง</span>
+              <span class="radio-desc">ลงทะเบียนไว้ก่อน โอนชำระเงินทีหลัง</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pay Later Notice Box -->
+    <div id="payLaterNotice" class="info-box" style="display: none; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; margin-bottom: 20px; border-radius: 12px; padding: 15px;">
+      <i class="fa-solid fa-clock" style="color:#f59e0b; font-size:1.6rem;"></i>
+      <div>
+        <span style="color:#f59e0b; font-weight:700; font-size: 1rem;">ลงทะเบียนสำรองสิทธิ์ไว้ชำระเงินทีหลัง</span>
+        <label style="color:#e2e8f0; font-size:0.85rem; margin-top:3px; display:block;">
+          คุณสามารถลงทะเบียนล่วงหน้าได้เลย และสามารถโอนชำระเงินเข้าบัญชี SCB 560-286-0945 (ร.ต.วันชัย มีชาญ) ในภายหลังได้จนถึงวันที่ 31 ธ.ค. 2569
+        </label>
+      </div>
+    </div>
+
     <!-- Payment Account Section -->
     <div id="sec-payment" class="payment-box">
       <div class="bank-logo">SCB</div>
@@ -859,7 +898,7 @@
     </div>
 
     <!-- Slip Upload Section -->
-    <div class="form-section">
+    <div id="slipUploadSection" class="form-section">
       <div class="section-header">
         <i class="fa-solid fa-file-invoice-dollar"></i> แนบหลักฐานการโอนเงิน (สลิป) <span class="required">*</span>
       </div>
@@ -871,7 +910,7 @@
 
     <!-- Submit Button -->
     <button type="submit" id="submitBtn" class="btn-submit" style="margin-bottom: 25px;">
-      <i class="fa-solid fa-paper-plane"></i> ยืนยันการลงทะเบียนและโอนเงิน
+      <i class="fa-solid fa-paper-plane"></i> <span id="submitBtnText">ยืนยันการลงทะเบียนและโอนเงิน</span>
     </button>
   </form>
 
@@ -1142,7 +1181,9 @@
   document.getElementById("bookingForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    if (!slipBase64) {
+    const paymentOption = document.querySelector('input[name="paymentOption"]:checked').value;
+
+    if (paymentOption === "ชำระเงินทันที" && !slipBase64) {
       alert("กรุณาแนบสลิปการโอนเงินก่อนส่งแบบฟอร์ม");
       return;
     }
@@ -1163,8 +1204,9 @@
       followerRoom: document.getElementById("followerRoomCheck").checked,
       extraShirtsDetail: getExtraShirtsSummary(),
       totalAmount: totalAmount,
+      paymentOption: paymentOption,
       note: document.getElementById("note").value,
-      slipImage: slipBase64
+      slipImage: paymentOption === "ชำระเงินทันที" ? slipBase64 : ""
     };
 
     if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") {
@@ -1210,9 +1252,31 @@
     })
     .finally(() => {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> ยืนยันการลงทะเบียนและโอนเงิน`;
+      const isPayNow = document.querySelector('input[name="paymentOption"]:checked').value === "ชำระเงินทันที";
+      submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span id="submitBtnText">${isPayNow ? 'ยืนยันการลงทะเบียนและโอนเงิน' : 'ยืนยันการลงทะเบียน (ไว้ชำระเงินทีหลัง)'}</span>`;
     });
   });
+
+  // Toggle Payment Option Handler
+  function togglePaymentOption() {
+    const isPayNow = document.querySelector('input[name="paymentOption"]:checked').value === "ชำระเงินทันที";
+    const slipSection = document.getElementById("slipUploadSection");
+    const slipInput = document.getElementById("slipInput");
+    const payLaterNotice = document.getElementById("payLaterNotice");
+    const submitBtnText = document.getElementById("submitBtnText");
+
+    if (isPayNow) {
+      slipSection.style.display = "block";
+      slipInput.required = true;
+      payLaterNotice.style.display = "none";
+      if (submitBtnText) submitBtnText.innerText = "ยืนยันการลงทะเบียนและโอนเงิน";
+    } else {
+      slipSection.style.display = "none";
+      slipInput.required = false;
+      payLaterNotice.style.display = "flex";
+      if (submitBtnText) submitBtnText.innerText = "ยืนยันการลงทะเบียน (ไว้ชำระเงินทีหลัง)";
+    }
+  }
 
   function showStatusModal(iconClass, color, title, desc) {
     const modal = document.getElementById("statusModal");

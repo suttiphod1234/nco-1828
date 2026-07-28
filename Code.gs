@@ -159,13 +159,18 @@ function doPost(e) {
     const followerRoom = data.followerRoom ? "รับห้องพัก (+200B)" : "ไม่รับห้องพัก";
     const extraShirts = data.extraShirtsDetail || "ไม่มี";
     const totalAmount = data.totalAmount || 0;
+    const paymentOption = data.paymentOption || "ชำระเงินทันที";
     const note = data.note || "";
     const slipData = data.slipImage || "";
-    const initialStatus = "รับข้อมูลแล้ว (รอตรวจสอบสลิป)";
+
+    let initialStatus = "รับข้อมูลแล้ว (รอตรวจสอบสลิป)";
+    if (paymentOption === "ไว้ชำระเงินทีหลัง") {
+      initialStatus = "ลงทะเบียนแล้ว (ไว้ชำระเงินทีหลัง)";
+    }
 
     // Save image to Google Drive if folder exists or store link
     let slipUrl = slipData;
-    if (slipData && slipData.startsWith("data:image")) {
+    if (paymentOption === "ชำระเงินทันที" && slipData && slipData.startsWith("data:image")) {
       try {
         const folderName = "NCO1828_Slips";
         let folder;
@@ -184,6 +189,8 @@ function doPost(e) {
       } catch (err) {
         slipUrl = "แนบสลิปเรียบร้อยแล้ว (อัปโหลดเข้า Drive ติดขัดสิทธิ์)";
       }
+    } else if (paymentOption === "ไว้ชำระเงินทีหลัง") {
+      slipUrl = "ไว้ชำระเงินทีหลัง";
     }
     
     sheet.appendRow([
@@ -207,6 +214,11 @@ function doPost(e) {
     if (email && email.includes("@")) {
       try {
         const emailSubject = `[ยืนยันการลงทะเบียน] งานเลี้ยงรุ่น NCO.1828 เหล่าทหารปืนใหญ่ - ${name}`;
+        const payStatusColor = paymentOption === "ไว้ชำระเงินทีหลัง" ? "#f59e0b" : "#22c55e";
+        const payStatusText = paymentOption === "ไว้ชำระเงินทีหลัง" 
+          ? "ไว้ชำระเงินทีหลัง (สามารถโอนเงินเข้า SCB 560-286-0945 ก่อน 31 ธ.ค. 69)"
+          : "แนบสลิปเรียบร้อยแล้ว (รอตรวจสอบ)";
+
         const emailBody = `
           <div style="font-family: 'Sarabun', Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #d4af37; border-radius: 16px; padding: 25px; background-color: #0b1326; color: #f8fafc;">
             <h2 style="color: #d4af37; text-align: center; margin-bottom: 5px;">ยืนยันการลงทะเบียนงานเลี้ยงรุ่น NCO.1828</h2>
@@ -214,7 +226,7 @@ function doPost(e) {
             <hr style="border-color: rgba(212,175,55,0.3); margin: 20px 0;">
             
             <p>เรียน <strong>${name}</strong>,</p>
-            <p>ระบบได้รับการลงทะเบียนและหลักฐานการโอนเงินเรียบร้อยแล้ว โดยมีรายละเอียดดังนี้:</p>
+            <p>ระบบได้รับการลงทะเบียนของคุณเรียบร้อยแล้ว โดยมีรายละเอียดดังนี้:</p>
             
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0; color: #fff; font-size: 0.95rem; background: rgba(255,255,255,0.03); border-radius: 8px; overflow: hidden;">
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);"><td style="padding: 10px; color: #94a3b8;">ยศ - ชื่อ-นามสกุล:</td><td style="padding: 10px; font-weight: bold;">${name}</td></tr>
@@ -225,6 +237,7 @@ function doPost(e) {
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);"><td style="padding: 10px; color: #94a3b8;">จำนวนผู้ติดตาม:</td><td style="padding: 10px;">${followerCount} คน (${followerRoom})</td></tr>
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);"><td style="padding: 10px; color: #94a3b8;">เสื้อสั่งซื้อเพิ่ม:</td><td style="padding: 10px;">${extraShirts}</td></tr>
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);"><td style="padding: 10px; color: #94a3b8;">ยอดชำระเงินรวม:</td><td style="padding: 10px; font-weight: bold; color: #22c55e; font-size: 1.15rem;">${totalAmount} บาท</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);"><td style="padding: 10px; color: #94a3b8;">สถานะชำระเงิน:</td><td style="padding: 10px; font-weight: bold; color: ${payStatusColor};">${payStatusText}</td></tr>
             </table>
 
             <div style="background: rgba(212, 175, 55, 0.15); border: 1px solid #d4af37; border-radius: 12px; padding: 15px; text-align: center; margin: 20px 0;">
